@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd ">
+
+    <changeSet id="create_product_manufacturer_table" author="shestakov.vasily">
+        <createTable tableName="PRODUCT_MANUFACTURER">
+            <column name="PRODUCT_ID" type="BIGSERIAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MANUFACTURER_ID" type="BIGSERIAL">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="create_product_manufacturer_table_fk" author="shestakov.vasily">
+        <addPrimaryKey tableName="PRODUCT_MANUFACTURER" columnNames="PRODUCT_ID, MANUFACTURER_ID"/>
+        <addForeignKeyConstraint baseTableName="PRODUCT_MANUFACTURER" baseColumnNames="PRODUCT_ID" constraintName="FK_PRODUCT_MANUFACTURER_PRODUCT"
+                                 referencedTableName="PRODUCT"
+                                 referencedColumnNames="ID"/>
+        <addForeignKeyConstraint baseTableName="PRODUCT_MANUFACTURER" baseColumnNames="MANUFACTURER_ID" constraintName="FK_PRODUCT_MANUFACTURER_MANUFACTURER"
+                                 referencedTableName="MANUFACTURER"
+                                 referencedColumnNames="ID"/>
+    </changeSet>
+
+</databaseChangeLog>
