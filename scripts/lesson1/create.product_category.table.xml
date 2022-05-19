@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd
+    http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd ">
+
+    <changeSet id="create_product_category_table" author="shestakov.vasily">
+        <createTable tableName="PRODUCT_CATEGORY">
+            <column name="PRODUCT_ID" type="BIGSERIAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CATEGORY_ID" type="BIGSERIAL">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="create_product_category_table_fk" author="shestakov.vasily">
+        <addPrimaryKey tableName="PRODUCT_CATEGORY" columnNames="PRODUCT_ID, CATEGORY_ID"/>
+        <addForeignKeyConstraint baseTableName="PRODUCT_CATEGORY" baseColumnNames="PRODUCT_ID" constraintName="FK_PRODUCT_CATEGORY_PRODUCT"
+                                 referencedTableName="PRODUCT"
+                                 referencedColumnNames="ID"/>
+        <addForeignKeyConstraint baseTableName="PRODUCT_CATEGORY" baseColumnNames="CATEGORY_ID" constraintName="FK_PRODUCT_CATEGORY_CATEGORY"
+                                 referencedTableName="CATEGORY"
+                                 referencedColumnNames="ID"/>
+    </changeSet>
+
+</databaseChangeLog>
